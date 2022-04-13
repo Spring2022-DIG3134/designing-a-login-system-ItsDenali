@@ -59,23 +59,23 @@
     }
 
     //Removes user from database
-    function database_deleteUser()  {
+    function database_deleteUser($username, $password)  {
         global $connection;
-        $status = database_verifyUser();
+        $status = database_verifyUser($username, $password);
         if ($status) {
-            $deleteUsers = "DELETE FROM users WHERE username = '{$username}'"
+            $deleteUsers = "DELETE FROM users WHERE username = '{$username}'";
             mysql_query($connection, $deleteUsers);
         }
     }
 
     //Updates password for user
-    function database_updatePassword()  {
+    function database_updatePassword($username, $password, $newPassword)  {
         global $connection;
-        $status = database_verifyUser();
+        $status = database_verifyUser($username, $password);
         if ($status)    {
-        $newPassword = password_hash();
-        $updatePassword = "UPDATE users SET password = '{$newPassword}' WHERE username = '{$username}'"
-        mysqli_query();
+        $newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $updatePassword = "UPDATE users SET password = '{$newPassword}' WHERE username = '{$username}'";
+        mysqli_query($connection, $updatePassword, $newPassword);
         }
     }
 
