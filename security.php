@@ -77,4 +77,29 @@
         // Return array
         return $result;
     }
+
+    //Deletes a user's info from the database
+    function security_deleteUser()  {
+        $result = security_sanitize();
+        database_connect();
+        database_deleteUser($result['username'], $result['password']);
+        database_close();
+    }
+
+    //Clears a user's info then updates it with the input data
+    function security_updatePassword()  {
+        $status = false;
+        if(isset($_POST['username']) && isset($_POST['password'] && isset($_POST['newPassword'])))  {
+            $status = true;
+        }
+        $result = ['username' => null, 'password' => null];
+
+        if($status == true) {
+            $result['username'] = htmlspecialchars($_POST['username']);
+            $result['password'] = htmlspecialchars($_POST['password']);
+            $result['newPassword'] = htmlspecialchars($_POST['newPassword']);
+        }
+    }
+
+
 ?>

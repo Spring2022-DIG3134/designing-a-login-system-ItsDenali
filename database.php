@@ -55,9 +55,30 @@
                 }
             }
         }
-
         return $status;
     }
+
+    //Removes user from database
+    function database_deleteUser()  {
+        global $connection;
+        $status = database_verifyUser();
+        if ($status) {
+            $deleteUsers = "DELETE FROM users WHERE username = '{$username}'"
+            mysql_query($connection, $deleteUsers);
+        }
+    }
+
+    //Updates password for user
+    function database_updatePassword()  {
+        global $connection;
+        $status = database_verifyUser();
+        if ($status)    {
+        $newPassword = password_hash();
+        $updatePassword = "UPDATE users SET password = '{$newPassword}' WHERE username = '{$username}'"
+        mysqli_query();
+        }
+    }
+
 
     function database_close() {
         // user global connection
