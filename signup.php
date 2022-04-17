@@ -1,6 +1,6 @@
 <?php
 // Import the security file so you can call its functions
-    include("security.php")
+    include('security.php')
 ?>
 
 <html>
@@ -11,31 +11,29 @@
 
 <body>
 
-    <p>Please enter your information below:</p>
+<?php     
+    if (security_loggedIn()) {
+        echo("<a href='index.php'> Main Menu</a>");
+    }
 
-    <form action="signup.php" method="POST">
+    else{
+        echo("<p>Please enter your information below:</p>");
+        
+        echo("<form action='signup.php' method='POST'>");
+        echo("<label for='username'>Username<label>");
+        echo("<input type='text' name='username' id='username'>");
+        echo("<label for='password'>Password<label>");
+        echo("<input type='text' name='password' id='password'>");
+        echo("<input type='submit' name='submit' value='Submit'>");
+        echo("</form>");
 
-        <label for="username">Username<label>
-
-        <input type="text" name="username" id="username">
-
-        <label for="password">Password<label>
-
-        <input type="text" name="password" id="password">
-
-        <input type="submit" name="submit" value="Submit">
-
-    </form>
-
-
-    <?php
-
-    // Call the validation and addNewUser functions from
-    // security.php, which are imported at the very top.
-
-    if (security_validate()) 
-        security_addNewUser();
-    ?>
+        // Call the validation and addNewUser functions from
+        // security.php, which are imported at the very top.
+        if (security_validate()) 
+            security_addNewUser();
+        }
+    }
+?>
 
 </body>
 </html>

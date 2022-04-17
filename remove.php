@@ -1,6 +1,6 @@
 <?php
     //Import the security file to use the deleteUser function
-    INCLUDE("security.php")
+    include("security.php")
     security_deleteUser();
 ?>
 
@@ -8,24 +8,32 @@
 
     <body>
 
-        <h2>Enter your username and password below to remove them from our system.</h2>
-        
-        <br></br>
-
-        <form action="remove.php" method="POST">
-            <label>Username</label>
-            <input type="text" name="username"> </input>
+    <?php     
+        if (security_loggedIn()) {
             
-            <br></br>
+            echo("<h2>Enter your username and password below to remove them from our system.</h2>");
+        
+            echo("<br></br>");
 
-            <label>Password</label>
-            <input type="text" name="password"></input>
+            echo("<form action='remove.php' method='POST'>");
+            echo("<label>Username</label>");
+            echo("<input type='text' name='username'> </input>");
+            
+            echo("<br></br>");
+
+            echo("<label>Password</label>");
+            echo("<input type='text' name='password'></input>");
            
-            <br></br>
+            echo("<br></br>");
 
-            <input type="submit"></input>
+            echo("<input type='submit'></input>");
 
-        </form>
+            echo("</form>");
+        }
+        else {
+            echo("<a href='signup.php'> Sign up here.</a>");
+        }
+    ?>
 
     </body>
 

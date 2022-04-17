@@ -13,39 +13,42 @@
 
 <body>
 
-    <p>Welcome back!</p>
-    <br/>
-    <p>Please enter your username and password:</p>
-
-    <form action="login.php" method="POST">
-
-        <label for="username">Username<label>
-
-        <input type="text" name="username" id="username">
-
-        <label for="password">Password<label>
-
-        <input type="text" name="password" id="password">
-
-        <input type="submit" name="submit" value="Submit">
-
-    </form>
-
-<?php
-    // If login is correct, let the user log in
-    if (security_validate())    {
-        security_login();
+<?php     
+    if (security_loggedIn()) {
+        echo("<a href='index.php'> Main Menu</a>");
     }
-    // Then finalize the login process and display a message
-    if (security_loggedIn())    {
-        echo("Thank you for logging in!");
-        echo("<br/>")
-        echo("What a nice, empty page...");
 
+    else{
+        echo("<p>Welcome!</p>");
 
-        //And create a link to run the log out program 
-        echo("<a href='login.php'> Click to Log Out</a>")
-    }
+        echo("<br/>");
+        
+        echo("<p>Please enter your username and password:</p>");
+
+        echo("<form action='login.php' method='POST'>");
+        echo("<label for='username'>Username<label>");
+        echo("<input type='text' name='username' id='username'>");
+        echo("<label for='password'>Password<label>");
+        echo("<input type='text' name='password' id='password'>");
+        echo("<input type='submit' name='submit' value='Submit'>");
+        echo("</form>");
+
+        // If login is correct, let the user log in
+        if (security_validate())    {
+            security_login();
+        }else{}
+
+        // Then finalize the login process and display a message
+        if (security_loggedIn())    {
+            echo("Thank you for logging in!");
+            echo("<br/>");
+            echo("What a nice, empty page...");
+
+            //And create a link to run the log out program 
+            echo("<a href='logout.php'> Click to Log Out</a>");
+        }else{}
+
+}
 ?>
 </body>
 </html>
